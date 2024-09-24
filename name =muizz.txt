@@ -1,2 +1,2 @@
-name =muizz 
+name =Skmuizz 
 study in 11th std 
