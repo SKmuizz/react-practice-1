@@ -1,5 +1,5 @@
 git init
 git remote add origin https://github.com/SKmuizz/react-practice-1/commit/98bde6e0fc546d4357e445d9c04a3ce778e3818e
 git add .
-git commit -m"initial commit "
+git commit -m"initial commit "                 
 git push -u origin master 
