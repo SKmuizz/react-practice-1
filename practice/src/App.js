@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './App.css';
 import Profile from './components/Profile';
 
@@ -27,12 +28,19 @@ function App() {
     about :"i am  developer",
   }
 ]
+useEffect(()=>{
+  fetch('/data/profiles.json')
+  .then(data => setProfiles (data))
+  .catch (error => console.error ('error fetching the profiles:',error))
+},[]);
   return (
     <div className='container mt-5'>
+      <div className='row'>
       <h1> Github profile</h1>
       {profiles.map ((profile ,key) =>{
-        return<Profile key={key} name={profile.name} pic={profile.img} us={profile.about} profileurl={profile.profile}/>
+        return<Profile key={key} profile={profile}/>
       })}
+      </div>
     </div>
   );
 }

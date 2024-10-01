@@ -2,7 +2,7 @@ import React from "react";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-const Profile = ({pic,name,us,profileurl}) => {
+const Profile = ({Profile}) => {
   
     return(
         
@@ -13,11 +13,11 @@ const Profile = ({pic,name,us,profileurl}) => {
       // </div>
 
       <Card className="mb-4" style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={pic} />
+        <Card.Img variant="top" src={Profile.img} />
         <Card.Body>
-          <Card.Title>{name}</Card.Title>
-          <Card.Text> {us} </Card.Text>
-          <Card.Link href={profileurl} target="_blank" ><Button variant="primary"> {name} visit link</Button></Card.Link>
+          <Card.Title>{Profile.name}</Card.Title>
+          <Card.Text> {Profile.us} </Card.Text>
+          <Card.Link href={Profile.url} target="_blank" ><Button variant="primary"> {Profile.name} visit link</Button></Card.Link>
         </Card.Body>
       </Card>
     )
