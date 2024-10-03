@@ -1,48 +1,88 @@
-import { useEffect } from 'react';
-import './App.css';
-import Profile from './components/Profile';
+import "./App.css";
+import Profile from "./components/Profile";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import React, { useState, useEffect } from "react";
 
 function App() {
+  const [data , setData] = useState({
+    name: "",
+    age: "",
+    city:"",
+  })
 
-  const profiles =[
-    
-    {
-    name :"Skmuizz",
-    img :"https://avatars.githubusercontent.com/u/182518127?v=4",
-    about :"i am  web student",
+  const [isEmpty, setIsEmpty] = useState(true); 
 
-  },
-    {
-    name :"samit",
-    img :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpxgvovMnbZgJNfJZ3kKgWdvCGasVNtlmNgg&s",
-    about :"i am  web developer",
-  },
-    {
-    name :"rehan",
-    img :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLPYI8YHdzogEU5Xp74SdcZqZZnAnpZ73BJg&s",
-    about :"i am  developer",
-  },
-  {
-    name :"huzaif",
-    img :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmH36NKXungpx2CsBeZTycBh-5M08gr1d_xg&s",
-    about :"i am  developer",
-  }
-]
-useEffect(()=>{
-  fetch('/data/profiles.json')
-  .then(data => setProfiles (data))
-  .catch (error => console.error ('error fetching the profiles:',error))
-},[]);
+
   return (
-    <div className='container mt-5'>
-      <div className='row'>
-      <h1> Github profile</h1>
-      {profiles.map ((profile ,key) =>{
-        return<Profile key={key} profile={profile}/>
-      })}
-      </div>
+    <div className="container">
+      {
+        isEmpty == true ?
+          <h1>No Data</h1>
+        :
+        <>
+        {
+          data.name != '' ? <h1>Name: {data.name}</h1> : <></>
+        }
+        {
+          data.age != '' ? <h1>Age: {data.age}</h1> : <></>
+          
+        }
+        {
+          data.city != '' ? <h1>city: {data.city}</h1> : <></>
+          
+        }
+        </>
+      }
+      
+      <input type="text" onChange={
+        (e)=>{
+          setData({
+            ...data,
+            name: e.target.value
+          })
+          setIsEmpty(e.target.value == '' && data.age == '' && data.city == '' ? true : false)
+        }
+      }/>
+      <input type="text" onChange={
+        (e)=>{
+          setData({
+            ...data,
+            age: e.target.value
+          })
+          setIsEmpty(data.name == '' &&  e.target.value == '' && data.city == '' ? true : false)
+          }}/>
+          <input type="text" onChange={
+        (e)=>{
+          setData({
+            ...data,
+            city: e.target.value
+          })
+          setIsEmpty(data.name == '' && data.age == '' &&  e.target.value == '' ? true : false)
+        }
+      }/>
     </div>
-  );
+  )
+   // const [profiles, setProfiles] = useState([]);
+  // useEffect(() => {
+  //   fetch('/data/Profile.json')
+  //     .then((response) => response.json())
+  //     .then((data) => setProfiles(data))
+  //     .catch((error) => console.error("Error fetching the profiles:", error));
+  // }, []);
+
+  // return (
+  //   <div className="container mt-5 mb-5">
+  //     <div className="row">
+  //       <h1 className="mb-5">GitHubs Profile</h1>
+  //       {profiles.map((profile, key) => {
+  //         return <Profile key={key} profile={profile} />;
+  //       })}
+  //     </div>
+  //   </div>
+  // );
+
+  
 }
 
 export default App;
